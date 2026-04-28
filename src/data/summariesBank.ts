@@ -1,0 +1,471 @@
+import { SummarySection } from '../types';
+
+export const summariesBank: SummarySection[] = [
+  {
+    title: "1. Web Mechanisms & Architecture",
+    content: [
+      "### 1. Overview",
+      "Imagine the internet as a massive network of roads connecting billions of computers. Web architecture is the system of rules that allows these computers to talk to each other so you can view websites.",
+      
+      "### 2. Key Concepts Explained",
+      "**Client-Server Model**: Think of the 'Client' as you sitting in a restaurant (your web browser), and the 'Server' as the kitchen. You ask for a webpage (place an order), and the server prepares it and sends it back to you.",
+      "**IP Address**: Every computer on the internet has a unique number (like a phone number), e.g., `142.250.190.46`.",
+      "**DNS (Domain Name System)**: Humans are bad at remembering numbers, so we use names like `google.com`. DNS is the internet's phonebook that translates `google.com` into its IP address.",
+      "**URL vs. URI**: A URI is an identifier (like a person's name). A URL is a locator (like a person's home address). All URLs are URIs.",
+      
+      "### 3. Examples",
+      "**The Web Browsing Process**:",
+      "You type `facebook.com` -> Your browser asks DNS for Facebook's IP -> Your browser connects to that IP -> Facebook's Server sends back HTML files -> Your browser draws the page on your screen.",
+      
+      "### 4. Code Snippets (where applicable)",
+      "```text",
+      "Breakdown of a URL:",
+      "https://www.example.com:443/path/to/page?name=john#top",
+      " |       |                 |    |          |        |",
+      "Protocol Host            Port  Path      Query   Fragment",
+      "```",
+      
+      "### 5. Diagrams / Visual Explanation",
+      "**Forward vs Reverse Proxy**:",
+      "- `Client -> Forward Proxy -> Internet` (Hides the Client, like a VPN).",
+      "- `Internet -> Reverse Proxy -> Server` (Hides the Server, used for Load Balancing to prevent crashes).",
+      
+      "### 6. Common Mistakes / Exam Traps",
+      "- **Trap**: Assuming servers only send HTML. Servers can send data (JSON), images, videos, or PDFs.",
+      "- **Mistake**: Confusing a domain name with a URL. `google.com` is a domain. `https://google.com/search` is a URL.",
+      
+      "### 7. Quick Revision Points",
+      "- DNS = Domain Name System (Translates names to IP).",
+      "- Clients request, Servers respond.",
+      
+      "### Bonus: Likely Exam Questions",
+      "- **Q1**: Explain the difference between a Forward Proxy and a Reverse Proxy.",
+      "  **Answer**: A forward proxy acts on behalf of the client (hiding the client's IP from the web). A reverse proxy acts on behalf of the server (intercepting incoming web traffic to distribute load across multiple backend servers).",
+      "- **Q2**: What is the purpose of DNS?",
+      "  **Answer**: DNS resolves human-readable domain names (like mit.edu) into machine-readable IP addresses required for network routing.",
+      "- **Q3**: Contrast a URI and a URL.",
+      "  **Answer**: A URI identifies a resource. A URL is a specific type of URI that identifies a resource exclusively by its network location/address."
+    ]
+  },
+  {
+    title: "2. HTTP / HTTPS Protocols",
+    content: [
+      "### 1. Overview",
+      "HTTP (Hypertext Transfer Protocol) is the language web browsers and servers use to talk to each other. HTTPS is the exact same language, but spoken in an encrypted, secret code.",
+      
+      "### 2. Key Concepts Explained",
+      "**Statelessness**: HTTP has \"amnesia.\" Every time you click a link, the server forgets who you are. (We fix this later using Cookies/Sessions).",
+      "**Methods**: How the client tells the server what it wants to do.",
+      "- `GET`: Give me data (e.g., loading a webpage).",
+      "- `POST`: Take this data and create something (e.g., submitting a form).",
+      "**Status Codes**: The server's 3-digit reply code.",
+      "- 200: OK (Success).",
+      "- 404: Not Found (Client error, you asked for a bad link).",
+      "- 500: Internal Server Error (Server error, the kitchen caught fire).",
+      
+      "### 3. Examples",
+      "**Statelessness in Real Life**:",
+      "Imagine calling a customer service rep. Every time you ask a new question, they forget who you are, so you have to give them your account number again. That's HTTP.",
+      
+      "### 4. Code Snippets",
+      "```http",
+      "RAW HTTP GET REQUEST:",
+      "GET /index.html HTTP/1.1",
+      "Host: www.example.com",
+      "Accept: text/html",
+      "```",
+      
+      "### 5. Diagrams / Visual Explanation",
+      "**HTTPS Handshake**:",
+      "1. Client says 'Hello, I want to securely connect'.",
+      "2. Server sends its Digital Certificate (ID card).",
+      "3. Client verifies the ID and creates a secret key.",
+      "4. Secure encrypted conversation begins.",
+      
+      "### 6. Common Mistakes / Exam Traps",
+      "- **Trap**: Sending a password via a `GET` request. `GET` puts data in the URL (visible to everyone). Always use `POST` for passwords.",
+      "- **Mistake**: Thinking HTTP and HTTPS run on the same port. HTTP uses Port 80; HTTPS uses Port 443.",
+      
+      "### 7. Quick Revision Points",
+      "- HTTP is stateless.",
+      "- HTTPS uses TLS/SSL encryption.",
+      "- `GET` retrieves; `POST` submits.",
+      
+      "### Bonus: Likely Exam Questions",
+      "- **Q1**: Why is HTTP considered a stateless protocol?",
+      "  **Answer**: Because the server handles every request entirely independently and retains no memory of previous requests from the same client.",
+      "- **Q2**: Contrast the `GET` and `POST` methods.",
+      "  **Answer**: `GET` appends parameters to the URL, making it visible and cacheable, used for fetching data. `POST` places parameters in the request body, making it secure for sensitive data and used for submitting data.",
+      "- **Q3**: What does a 404 Status Code mean compared to a 500?",
+      "  **Answer**: 404 is a Client Error indicating the requested resource doesn't exist. 500 is a Server Error indicating the server encountered an unexpected crash while processing the request."
+    ]
+  },
+  {
+    title: "3. HTML5 & Semantic Web",
+    content: [
+      "### 1. Overview",
+      "HTML (HyperText Markup Language) is the skeleton of a webpage. It tells the browser what is a heading, what is a paragraph, and what is an image.",
+      
+      "### 2. Key Concepts Explained",
+      "**Basic HTML Tags**: Everything in HTML is wrapped in tags, using angle brackets.",
+      "- `<html>`: The root container for the whole page.",
+      "- `<head>`: Invisible metadata (title, links to CSS).",
+      "- `<body>`: The visible content of the page.",
+      "- `<h1>` to `<h6>`: Headings (h1 is the biggest, h6 is smallest).",
+      "- `<p>`: A standard text paragraph.",
+      "- `<a href=\"link\">`: A clickable anchor link.",
+      "- `<img src=\"image.jpg\" alt=\"desc\">`: An image.",
+      "**Semantic HTML**: Using tags that describe their *meaning*, not just how they look. Instead of a generic `<div>`, we use `<header>`, `<footer>`, `<article>`, and `<nav>`.",
+      
+      "### 3. Examples",
+      "**Why Semantic HTML Matters**:",
+      "Screen readers for blind users rely on semantic tags to understand the page structure. Search engines (like Google) use them to figure out what your page is about (SEO).",
+      
+      "### 4. Code Snippets",
+      "```html",
+      "<!-- Basic HTML Structure -->",
+      "<!DOCTYPE html>",
+      "<html>",
+      "<head>",
+      "  <title>My First Page</title>",
+      "</head>",
+      "<body>",
+      "  <header>",
+      "    <h1>Welcome to MIT815</h1>",
+      "  </header>",
+      "  <main>",
+      "    <p>This is a paragraph about internet programming.</p>",
+      "    <img src=\"logo.png\" alt=\"MIT Logo\">",
+      "    <a href=\"https://mit.edu\">Visit MIT</a>",
+      "  </main>",
+      "</body>",
+      "</html>",
+      "```",
+      
+      "### 5. Diagrams / Visual Explanation",
+      "**Canvas vs SVG**:",
+      "- `<canvas>`: Draws using pixels (like Microsoft Paint). Fast, but gets blurry if you zoom in.",
+      "- `<svg>`: Draws using math/vectors (like Adobe Illustrator). Perfect quality at any zoom level.",
+      
+      "### 6. Common Mistakes / Exam Traps",
+      "- **Trap**: Forgetting the `alt` attribute on an `<img>` tag. Without it, your page fails basic accessibility standards.",
+      "- **Mistake**: Using multiple `<h1>` tags on a single page. There should strictly be only one `<h1>` per page for SEO reasons.",
+      
+      "### 7. Quick Revision Points",
+      "- Tags usually come in pairs: opening `<p>` and closing `</p>`.",
+      "- Semantic tags provide meaning, not visual styling.",
+      "- `data-*` attributes store custom data directly in HTML.",
+      
+      "### Bonus: Likely Exam Questions",
+      "- **Q1**: What is Semantic HTML and why is it important?",
+      "  **Answer**: Semantic HTML uses tags that convey the meaning of the content (like `<nav>` for navigation). It is crucial for Accessibility (screen readers) and SEO.",
+      "- **Q2**: Contrast `<canvas>` and `<svg>`.",
+      "  **Answer**: `<canvas>` is raster/pixel-based, manipulated via JavaScript, and loses resolution when scaled. `<svg>` is vector-based, part of the DOM, and scales infinitely without quality loss.",
+      "- **Q3**: What is the purpose of the `alt` attribute?",
+      "  **Answer**: It provides alternative text for images, which is read by screen readers for visually impaired users and displayed if the image fails to load."
+    ]
+  },
+  {
+    title: "4. The Document Object Model (DOM)",
+    content: [
+      "### 1. Overview",
+      "The DOM is how the browser represents your HTML page in memory. It turns HTML tags into 'objects' that JavaScript can interact with to change the page dynamically.",
+      
+      "### 2. Key Concepts Explained",
+      "**The DOM Tree**: Think of the DOM as a family tree. `<html>` is the grandparent, `<head>` and `<body>` are the parents, and `<p>` tags inside them are the children.",
+      "**Selecting Elements**: JS needs to grab an element before changing it (e.g., `document.getElementById('title')`).",
+      "**Event Bubbling**: When you click a button inside a `<div>`, the click event happens on the button first, then 'bubbles' up to the `<div>`, and all the way up to the document.",
+      "**Event Delegation**: Taking advantage of bubbling by attaching one listener to a parent container instead of attaching 100 listeners to 100 child buttons.",
+      
+      "### 3. Examples",
+      "**Changing Content Dynamically**:",
+      "If you want to change text when a user clicks a button, you grab the element from the DOM, and modify its `textContent` property.",
+      
+      "### 4. Code Snippets",
+      "```javascript",
+      "// Selecting an element and changing its text",
+      "let heading = document.querySelector('h1');",
+      "heading.textContent = 'Hello, World!';",
+      "",
+      "// Adding a click event listener",
+      "let btn = document.getElementById('myButton');",
+      "btn.addEventListener('click', function() {",
+      "  alert('Button was clicked!');",
+      "});",
+      "```",
+      
+      "### 5. Diagrams / Visual Explanation",
+      "**Event Delegation Flow**:",
+      "If you have a `<ul>` with 50 `<li>` tags:",
+      "BAD: Adding 50 `addEventListener` functions to each `<li>`.",
+      "GOOD: Adding 1 `addEventListener` to the `<ul>`. When a user clicks an `<li>`, the event bubbles up to the `<ul>`, where you can check `event.target` to see exactly which `<li>` was clicked.",
+      
+      "### 6. Common Mistakes / Exam Traps",
+      "- **Trap**: Using `innerHTML` with user-submitted data. If a user types `<script>hack()</script>`, `innerHTML` will execute it (XSS attack). Use `textContent` instead.",
+      "- **Mistake**: Modifying the DOM 1,000 times in a loop. This is slow! Instead, use a `DocumentFragment` to build it off-screen, then append it to the DOM once.",
+      
+      "### 7. Quick Revision Points",
+      "- The DOM is an API for HTML and XML.",
+      "- `querySelector` is modern and flexible.",
+      "- Event bubbling moves UP the tree.",
+      
+      "### Bonus: Likely Exam Questions",
+      "- **Q1**: What is Event Delegation?",
+      "  **Answer**: Attaching a single event listener to a parent element to handle events triggered by its child elements, utilizing event bubbling. It improves memory and performance.",
+      "- **Q2**: Explain the security difference between `innerHTML` and `textContent`.",
+      "  **Answer**: `innerHTML` parses text as HTML and can execute scripts, making it vulnerable to XSS. `textContent` parses text strictly as raw text, making it secure against injection.",
+      "- **Q3**: What is a `DocumentFragment`?",
+      "  **Answer**: A lightweight, detached DOM object used to group multiple elements. Appending it to the DOM causes only a single reflow, optimizing performance."
+    ]
+  },
+  {
+    title: "5. CSS3 Layouts & Styling",
+    content: [
+      "### 1. Overview",
+      "CSS (Cascading Style Sheets) is the paint and interior design of a webpage. It controls colors, fonts, spacing, and where elements are positioned.",
+      
+      "### 2. Key Concepts Explained",
+      "**The Box Model**: EVERY element in HTML is a rectangular box. The box consists of:",
+      "- Content (the text or image)",
+      "- Padding (invisible space inside the border)",
+      "- Border (the visible edge)",
+      "- Margin (invisible space outside the border, pushing other elements away)",
+      "**CSS Selectors**: How you target an element. By tag (`p`), by class (`.my-class`), or by ID (`#my-id`).",
+      "**Flexbox**: A layout system designed for placing items in a single straight line (either a row or a column).",
+      "**CSS Grid**: A layout system designed for complex grids (both rows and columns at the same time).",
+      
+      "### 3. Examples",
+      "**CSS Specificity (Who Wins?)**:",
+      "If you say 'Make all paragraphs blue', but also say 'Make the paragraph with the ID #special red', the red wins because IDs are more specific than generic tags.",
+      
+      "### 4. Code Snippets",
+      "```css",
+      "/* Basic Styling */",
+      "body {",
+      "  background-color: #f0f0f0;",
+      "}",
+      "",
+      "/* The Box Model */",
+      ".box {",
+      "  width: 200px;",
+      "  padding: 20px;",
+      "  border: 2px solid black;",
+      "  margin: 10px;",
+      "  box-sizing: border-box; /* Crucial! Keeps box from growing */",
+      "}",
+      "```",
+      
+      "### 5. Diagrams / Visual Explanation",
+      "**Flexbox Alignments**:",
+      "- `justify-content`: Aligns items along the main axis (e.g., horizontally left to right).",
+      "- `align-items`: Aligns items along the cross axis (e.g., vertically top to bottom).",
+      
+      "### 6. Common Mistakes / Exam Traps",
+      "- **Trap**: Forgetting `box-sizing: border-box`. By default, if you set width to 100px and padding to 10px, the box actually becomes 120px wide! `border-box` fixes this.",
+      "- **Mistake**: Using `id` multiple times. An `id` must be 100% unique on a page. Use `class` for styling multiple elements.",
+      
+      "### 7. Quick Revision Points",
+      "- Specificity Weight: Inline > ID > Class > Tag.",
+      "- `position: absolute` positions relative to the nearest positioned parent.",
+      "- Media Queries make sites responsive to mobile screens.",
+      
+      "### Bonus: Likely Exam Questions",
+      "- **Q1**: What comprises the CSS Box Model?",
+      "  **Answer**: From inside out: Content, Padding, Border, Margin.",
+      "- **Q2**: How is CSS Specificity calculated?",
+      "  **Answer**: It is a weighting system where Inline styles have the highest weight, followed by IDs, then Classes/Attributes, and finally HTML Element selectors.",
+      "- **Q3**: Contrast `display: none` and `visibility: hidden`.",
+      "  **Answer**: `display: none` completely removes the element from the document flow (freeing up space). `visibility: hidden` makes it invisible but it still occupies physical space."
+    ]
+  },
+  {
+    title: "6. JavaScript Basics to Advanced",
+    content: [
+      "### 1. Overview",
+      "JavaScript (JS) is the brain of the webpage. While HTML is the skeleton and CSS is the skin, JS provides behavior, logic, and interactivity.",
+      
+      "### 2. Key Concepts Explained",
+      "**Variables (`let`, `const`, `var`)**: Containers for storing data.",
+      "**Control Structures**: Logic that dictates code flow.",
+      "- `if/else`: Do this *if* true, else do that.",
+      "- `for` loop: Repeat code a specific number of times.",
+      "**Arrays**: A list of items stored in a single variable.",
+      "**Closures**: A function that 'remembers' the variables around it, even after the outer function finishes running.",
+      "**Promises**: A way to handle tasks that take time (like downloading data) without freezing the webpage.",
+      
+      "### 3. Examples",
+      "**Array Indexing**: Arrays start at 0, not 1! The first item is `myArray[0]`.",
+      
+      "### 4. Code Snippets",
+      "```javascript",
+      "// 1. Variables",
+      "const name = 'Alice'; // Cannot be changed",
+      "let age = 25;         // Can be changed",
+      "",
+      "// 2. Control Structures (If/Else)",
+      "if (age >= 18) {",
+      "  console.log('Adult');",
+      "} else {",
+      "  console.log('Minor');",
+      "}",
+      "",
+      "// 3. Arrays & Loops",
+      "let fruits = ['Apple', 'Banana', 'Cherry'];",
+      "for (let i = 0; i < fruits.length; i++) {",
+      "  console.log(fruits[i]);",
+      "}",
+      "",
+      "// Array Methods",
+      "fruits.push('Date'); // Adds to end",
+      "```",
+      
+      "### 5. Diagrams / Visual Explanation",
+      "**The Event Loop (Async JS)**:",
+      "JS can only do one thing at a time (Single-threaded). If you ask it to download a big file, it hands the task to the browser (Web APIs) and keeps running other code. When the download finishes, the browser puts the result in the 'Task Queue', and JS processes it when it has free time.",
+      
+      "### 6. Common Mistakes / Exam Traps",
+      "- **Trap**: Using `==` instead of `===`. `==` allows type coercion (`'5' == 5` is true). `===` checks value AND type (`'5' === 5` is false). Always use `===`.",
+      "- **Mistake**: Using `var`. `var` has confusing scoping rules (function scoped). `let` and `const` are block-scoped and much safer.",
+      
+      "### 7. Quick Revision Points",
+      "- Arrays are 0-indexed.",
+      "- `let` and `const` replace `var`.",
+      "- Promises have 3 states: Pending, Fulfilled, Rejected.",
+      
+      "### Bonus: Likely Exam Questions",
+      "- **Q1**: What is a Closure?",
+      "  **Answer**: A closure is a function bundled together with references to its surrounding lexical environment. It allows an inner function to access an outer function's scope even after the outer function returns.",
+      "- **Q2**: Contrast `==` and `===`.",
+      "  **Answer**: `==` performs type coercion before comparison (loose equality). `===` requires both value and type to be identical (strict equality).",
+      "- **Q3**: Explain the JS Event Loop.",
+      "  **Answer**: The Event Loop constantly monitors the Call Stack and Task Queue. If the Call Stack is empty, it pushes the first pending callback from the Task Queue onto the stack for execution, enabling non-blocking asynchronous behavior."
+    ]
+  },
+  {
+    title: "7. PHP Fundamentals & Security",
+    content: [
+      "### 1. Overview",
+      "PHP is a server-side language. Unlike JS which runs in the browser, PHP runs on the backend server. It generates HTML and sends it to the user. The user never sees the raw PHP code.",
+      
+      "### 2. Key Concepts Explained",
+      "**PHP Basics**: All PHP code must be wrapped inside `<?php ... ?>`. Variables ALWAYS start with a dollar sign `$`. Statements MUST end with a semicolon `;`.",
+      "**PHP Arrays**: PHP has two types of arrays:",
+      "- *Indexed Arrays*: Numbered lists (like JS arrays).",
+      "- *Associative Arrays*: Use named keys instead of numbers (like JS Objects or dictionaries).",
+      "**Superglobals**: Built-in variables available everywhere, like `$_GET` (URL data) and `$_POST` (Form data).",
+      "**Sessions**: A way to store information (like \"User is logged in\") on the server securely.",
+      
+      "### 3. Examples",
+      "**Associative Arrays**:",
+      "Instead of `scores[0]`, you can use `scores['John']`. This makes data highly readable.",
+      
+      "### 4. Code Snippets",
+      "```php",
+      "<?php",
+      "// Basic Variables and Output",
+      "$name = \"Bob\";",
+      "echo \"Hello, \" . $name; // Dot (.) concatenates strings",
+      "",
+      "// Indexed Array",
+      "$colors = array(\"Red\", \"Green\", \"Blue\");",
+      "",
+      "// Associative Array",
+      "$ages = array(\"Peter\"=>35, \"Ben\"=>37, \"Joe\"=>43);",
+      "echo \"Peter is \" . $ages['Peter'] . \" years old.\";",
+      "",
+      "// Foreach Loop (Perfect for arrays)",
+      "foreach($ages as $person => $age) {",
+      "  echo \"$person = $age <br>\";",
+      "}",
+      "?>",
+      "```",
+      
+      "### 5. Diagrams / Visual Explanation",
+      "**Sessions vs Cookies**:",
+      "- **Cookie**: Saved in the user's browser. (Not secure, user can edit it).",
+      "- **Session**: Saved on the server. The user only gets a random 'Session ID' cookie. (Highly secure).",
+      
+      "### 6. Common Mistakes / Exam Traps",
+      "- **Trap**: Writing `session_start()` after `echo \"Hello\";`. `session_start()` modifies HTTP headers and MUST be the absolute first line of code before any HTML is sent.",
+      "- **Mistake**: Outputting user data without escaping it. Always wrap user output in `htmlspecialchars()` to prevent XSS (Cross-Site Scripting) attacks.",
+      
+      "### 7. Quick Revision Points",
+      "- Variables start with `$`.",
+      "- String concatenation uses a dot `.`",
+      "- Use `$_POST` for sensitive form data.",
+      "- `require` kills the script on error, `include` just warns.",
+      
+      "### Bonus: Likely Exam Questions",
+      "- **Q1**: What is an associative array in PHP?",
+      "  **Answer**: An array that uses named keys (strings) instead of numeric indexes to store and retrieve values.",
+      "- **Q2**: How do you prevent Cross-Site Scripting (XSS) in PHP?",
+      "  **Answer**: By escaping all user-generated input before echoing it to the browser using functions like `htmlspecialchars()`, which converts dangerous characters into safe HTML entities.",
+      "- **Q3**: Contrast Sessions and Cookies.",
+      "  **Answer**: Cookies store data directly on the client's browser (vulnerable to tampering). Sessions store data securely on the server, issuing only a generic Session ID cookie to the client to link their state."
+    ]
+  },
+  {
+    title: "8. MySQL Database & PDO Integration",
+    content: [
+      "### 1. Overview",
+      "If variables hold data for a few seconds, databases hold data forever. MySQL is a relational database (think of Excel spreadsheets linked together). PHP talks to MySQL using a secure tool called PDO.",
+      
+      "### 2. Key Concepts Explained",
+      "**Tables, Rows, Columns**: Data is stored in Tables (e.g., 'Users'). Columns define the data type (e.g., 'Email', 'Age'). Rows are the actual data entries.",
+      "**Primary Key**: A unique ID for every row (like a Social Security Number).",
+      "**SQL Basics (CRUD)**:",
+      "- `INSERT`: Add new data.",
+      "- `SELECT`: Read data.",
+      "- `UPDATE`: Modify data.",
+      "- `DELETE`: Remove data.",
+      "**SQL Injection (SQLi)**: A hack where users type raw SQL commands into login boxes to trick the database.",
+      "**Prepared Statements**: The ultimate defense against SQLi. It separates the SQL logic from the user data.",
+      
+      "### 3. Examples",
+      "**Why we use Relational Databases**:",
+      "Instead of writing the user's full address on every order they make, you store the user in a `Users` table, and use their Primary Key ID in the `Orders` table. This links (relates) them.",
+      
+      "### 4. Code Snippets",
+      "```php",
+      "<?php",
+      "// Secure PDO Prepared Statement",
+      "$pdo = new PDO('mysql:host=localhost;dbname=school', 'user', 'pass');",
+      "",
+      "// 1. Prepare the statement with a placeholder (?)",
+      "$stmt = $pdo->prepare('SELECT * FROM students WHERE email = ?');",
+      "",
+      "// 2. Execute with the actual user data",
+      "$stmt->execute([$_POST['student_email']]);",
+      "",
+      "// 3. Fetch the results",
+      "$student = $stmt->fetch();",
+      "echo $student['name'];",
+      "?>",
+      "```",
+      
+      "### 5. Diagrams / Visual Explanation",
+      "**Types of JOINs**:",
+      "If you want to combine the `Users` table and the `Orders` table:",
+      "- **INNER JOIN**: Only gives users who HAVE orders.",
+      "- **LEFT JOIN**: Gives ALL users. If they don't have orders, the order fields are just NULL.",
+      
+      "### 6. Common Mistakes / Exam Traps",
+      "- **Trap**: Running an `UPDATE` or `DELETE` query without a `WHERE` clause. This will update or delete EVERY ROW in your entire table!",
+      "- **Mistake**: Inserting user data directly into a query string like `\"SELECT * FROM users WHERE id = \" . $id`. This causes SQL Injection.",
+      
+      "### 7. Quick Revision Points",
+      "- Primary Keys are unique and cannot be NULL.",
+      "- Foreign Keys link tables together.",
+      "- PDO = PHP Data Objects.",
+      "- Prepared statements = Safe SQL.",
+      
+      "### Bonus: Likely Exam Questions",
+      "- **Q1**: What is SQL Injection and how is it prevented?",
+      "  **Answer**: SQLi is a vulnerability where malicious SQL code is injected into input fields for unauthorized database execution. It is prevented using Prepared Statements, which strictly separate SQL structure from user data.",
+      "- **Q2**: Define a Primary Key and a Foreign Key.",
+      "  **Answer**: A Primary Key uniquely identifies a record within a table. A Foreign Key is a field in one table that uniquely identifies a row of another table, establishing a relationship.",
+      "- **Q3**: Contrast an `INNER JOIN` and a `LEFT JOIN`.",
+      "  **Answer**: `INNER JOIN` returns only records that have matching values in both tables. `LEFT JOIN` returns all records from the left table, and matched records from the right table (or NULL if no match)."
+    ]
+  }
+];
