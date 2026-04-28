@@ -1,12 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  LayoutDashboard,
-  BookOpen,
-  Zap,
-  Target,
-  Home,
-} from "lucide-react";
+import { LayoutDashboard, BookOpen, Zap, Target, Home } from "lucide-react";
 import { useStore } from "./hooks/useStore";
 import { QuizBank } from "./data/quizBank";
 
@@ -32,7 +26,7 @@ const App: React.FC = () => {
             justifyContent: "center",
             alignItems: "center",
             height: "100vh",
-            color: "white"
+            color: "white",
           }}
         >
           Loading Study Packet...
@@ -59,7 +53,12 @@ const App: React.FC = () => {
       case "flashcards":
         return <Flashcards data={data} onMark={markFlashcard} />;
       case "quiz":
-        return <QuizMode data={{...data, mcqs: QuizBank}} onSaveScore={saveQuizScore} />;
+        return (
+          <QuizMode
+            data={{ ...data, mcqs: QuizBank }}
+            onSaveScore={saveQuizScore}
+          />
+        );
       case "revision":
         return <Revision data={data} />;
       default:
@@ -127,11 +126,11 @@ const App: React.FC = () => {
               fontSize: "1.4rem",
               fontWeight: 800,
               letterSpacing: "-0.02em",
-              color: "white"
+              color: "white",
             }}
           >
             MIT815{" "}
-            <span style={{ opacity: 0.6, fontWeight: 400 }}>STUDY GUIDE</span>
+            <span style={{ opacity: 0.6, fontWeight: 400 }}>By Ridbay</span>
           </h1>
         </div>
       </header>
@@ -183,11 +182,12 @@ const App: React.FC = () => {
               gap: "8px",
               background:
                 activeTab === item.id ? "var(--primary)" : "transparent",
-              color: activeTab === item.id ? "white" : "rgba(255, 255, 255, 0.6)",
+              color:
+                activeTab === item.id ? "white" : "rgba(255, 255, 255, 0.6)",
               transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
               fontWeight: 600,
               border: "none",
-              cursor: "pointer"
+              cursor: "pointer",
             }}
           >
             {item.icon}
