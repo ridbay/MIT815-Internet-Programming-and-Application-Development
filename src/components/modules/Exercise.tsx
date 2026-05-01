@@ -143,30 +143,38 @@ const Exercise: React.FC = () => {
       title: "1. Factorial Application",
       icon: <Calculator size={20} />,
       question: "Develop an application that takes a number from a form, computes the factorial and displays it on the page.",
-      implementation: `function calculate() {
+      implementation: `<!-- HTML Structure -->
+<form>
+  <input type="number" id="numInput" placeholder="Enter number">
+  <button type="button" onclick="calculate()">Compute</button>
+</form>
+<div id="result"></div>
+
+<!-- JavaScript Logic -->
+<script>
+function calculate() {
   var n = document.getElementById("numInput").value;
   var resDiv = document.getElementById("result");
-  n = parseInt(n); // Convert input string to number
+  n = parseInt(n); // Convert to number
   
   if (isNaN(n) || n < 0) {
-    resDiv.innerHTML = "Error: Invalid Input";
+    resDiv.innerHTML = "Invalid Input";
     return;
   }
 
-  var fact = 1; // Initialize result
+  var fact = 1;
   for (var i = 1; i <= n; i++) {
-    fact = fact * i; // L8: Multiply iteratively
+    fact = fact * i; // L8: Iterate and multiply
   }
-  resDiv.innerHTML = "Result: " + fact;
-}`,
+  resDiv.innerHTML = "Factorial is: " + fact;
+}
+</script>`,
       explanation: [
-        "document.getElementById('numInput').value: Fetches the raw string from the input field.",
-        "parseInt(n): Crucial step to convert the string '5' into the mathematical number 5.",
-        "if (isNaN(n) || n < 0): Validates that the input is a real number and not negative.",
-        "var fact = 1: The 'accumulator'. We start at 1 because multiplying by 0 would wipe the result.",
-        "for (var i = 1; i <= n; i++): A standard loop that runs from 1 up to the target number.",
-        "fact = fact * i: In each step, we update the accumulator with the next multiplier.",
-        "resDiv.innerHTML: Updates the page content dynamically without a refresh."
+        "<input id='numInput'>: Creates a place for the user to type their number.",
+        "onclick='calculate()': Connects the HTML button to our JavaScript function.",
+        "parseInt(n): Converts the string input from the form into a workable number.",
+        "fact = fact * i: The iterative step that performs the actual factorial calculation.",
+        "innerHTML: Injects the final answer back into the empty <div> on the page."
       ],
       demo: <FactorialDemo />
     },
@@ -175,7 +183,14 @@ const Exercise: React.FC = () => {
       title: "2. Caesar Cipher App",
       icon: <Lock size={20} />,
       question: "Develop an application that encrypts a message using Caesar's scheme (Shift 3).",
-      implementation: `function encrypt() {
+      implementation: `<!-- HTML Structure -->
+<textarea id="msg" placeholder="Enter text"></textarea>
+<button onclick="encrypt()">Encrypt</button>
+<p id="output"></p>
+
+<!-- JavaScript Logic -->
+<script>
+function encrypt() {
   var text = document.getElementById("msg").value;
   var alphabet = "abcdefghijklmnopqrstuvwxyz".split("");
   var result = "";
@@ -185,27 +200,26 @@ const Exercise: React.FC = () => {
     var index = alphabet.indexOf(char);
     
     if (index !== -1) {
-      // Shift by 3 and use modulo 26 for wrap-around
-      var newIndex = (index + 3) % 26;
+      var newIndex = (index + 3) % 26; // L8: Modulo for wrap
       var newChar = alphabet[newIndex];
-      // Case preservation logic
+      // Case preservation
       if (text[i] === text[i].toUpperCase()) {
         newChar = newChar.toUpperCase();
       }
       result += newChar;
     } else {
-      result += text[i]; // Non-alpha characters
+      result += text[i];
     }
   }
   document.getElementById("output").innerHTML = result;
-}`,
+}
+</script>`,
       explanation: [
-        "alphabet.split(''): Converts the string into an array (L9) for easy index lookup.",
-        "for loop: Iterates through each character of the message independently.",
-        "indexOf(char): Finds the current letter's numeric position (0 for 'a', 25 for 'z').",
-        "(index + 3) % 26: The core algorithm. Modulo 26 ensures that 'z' (25) wraps back to 'c' (2).",
-        "result += newChar: Gradually builds the final ciphertext string.",
-        "if (text[i] === ...): Checks if the original character was uppercase to restore its casing."
+        "<textarea>: Used instead of <input> to allow for longer message encryption.",
+        "alphabet.split(''): Prepares our lookup table for character shifting (L9).",
+        "indexOf(char): Locates the character's position in the alphabet array.",
+        "(index + 3) % 26: Shifts the character by 3 and wraps 'z' back to the start.",
+        "innerHTML: Displays the resulting ciphertext in the <p> element."
       ],
       demo: <CaesarDemo />
     },
@@ -214,30 +228,48 @@ const Exercise: React.FC = () => {
       title: "3. Dynamic Form",
       icon: <UserPlus size={20} />,
       question: "Create a form that shows/hides elements based on user input selection.",
-      implementation: `function toggleFields() {
+      implementation: `<!-- HTML Structure -->
+<form>
+  <select id="userType" onchange="toggleFields()">
+    <option value="">--Select Type--</option>
+    <option value="student">Student</option>
+    <option value="staff">Staff</option>
+  </select>
+
+  <div id="studentField" style="display:none">
+    <input type="text" placeholder="Matric No">
+  </div>
+  
+  <div id="staffField" style="display:none">
+    <input type="text" placeholder="Staff ID">
+  </div>
+</form>
+
+<!-- JavaScript Logic -->
+<script>
+function toggleFields() {
   var type = document.getElementById("userType").value;
   var sField = document.getElementById("studentField");
   var tField = document.getElementById("staffField");
 
-  // L8: Control Structures (If/Else)
   if (type === "student") {
-    sField.style.display = "block"; // Show
-    tField.style.display = "none";  // Hide
+    sField.style.display = "block";
+    tField.style.display = "none";
   } else if (type === "staff") {
     sField.style.display = "none";
     tField.style.display = "block";
   } else {
-    // Reset if no selection
     sField.style.display = "none";
     tField.style.display = "none";
   }
-}`,
+}
+</script>`,
       explanation: [
-        "getElementById('userType').value: Captures the user's choice from a <select> dropdown.",
-        "style.display = 'block': CSS property used to make a hidden <div> or <input> visible.",
-        "style.display = 'none': CSS property used to completely hide an element from the layout.",
-        "if/else logic: The decision-making heart of the dynamic UI.",
-        "The final 'else': Essential for 'resetting' the form when the user clears their selection."
+        "<select onchange='...'>: Triggers logic immediately when the dropdown selection changes.",
+        "style='display:none': Initially hides the specific input fields from the user.",
+        "style.display = 'block': Dynamically shows a hidden field based on the chosen category.",
+        "if/else if (L8): Provides the branching logic to handle different user types.",
+        "value: Captures the 'student' or 'staff' string from the selected option."
       ],
       demo: <FormDemo />
     },
@@ -246,7 +278,9 @@ const Exercise: React.FC = () => {
       title: "4. Student & Course Objects",
       icon: <FileCode2 size={20} />,
       question: "Implement Student and Course objects using constructors and methods.",
-      implementation: `function Course(title) {
+      implementation: `<!-- Pure JavaScript Solution -->
+<script>
+function Course(title) {
   this.courseTitle = title;
 }
 
@@ -254,34 +288,38 @@ function Student(fname, sname, age) {
   this.firstName = fname;
   this.surname = sname;
   this.age = age;
-  this.registeredCourses = []; // Array (L9)
+  this.registeredCourses = [];
 
   this.changeSurname = function(newSurname) {
     this.surname = newSurname;
   };
 
-  this.registerCourse = function(courseInstance) {
-    // Check if input is actually a Course object
-    if (courseInstance instanceof Course) {
-      this.registeredCourses.push(courseInstance);
+  this.registerCourse = function(courseObj) {
+    if (courseObj instanceof Course) { // L9: Type check
+      this.registeredCourses.push(courseObj);
     }
   };
 
   this.displayCourses = function() {
     var titles = "";
     for (var i = 0; i < this.registeredCourses.length; i++) {
-      titles += this.registeredCourses[i].courseTitle + " ";
+      titles += this.registeredCourses[i].courseTitle + ", ";
     }
     return titles;
   };
-}`,
+}
+
+// Example usage on paper:
+var c1 = new Course("MIT815");
+var s1 = new Student("John", "Doe", 20);
+s1.registerCourse(c1);
+</script>`,
       explanation: [
-        "function Student(...): A constructor function (L9) used as a template for creating many students.",
-        "this.registeredCourses = []: Creates a private collection of data for each student instance.",
-        "this.changeSurname: A method attached to the student object to modify its properties.",
-        "instanceof Course: A safety check to ensure we only 'register' valid course objects.",
-        "for loop: Traverses the internal array of objects to extract specific data (titles).",
-        "return titles: Passes the data back to the caller for display."
+        "function Course(title): A constructor template for course objects (L9).",
+        "this.firstName = fname: Assigns passed arguments as properties of the object.",
+        "this.registeredCourses = []: Creates a dynamic array to hold course instances.",
+        "instanceof Course: Validates that we are only adding valid Course objects to the student.",
+        "for loop: Iterates through the collection of course objects to gather their titles."
       ],
       demo: <ObjectDemo />
     }
@@ -299,7 +337,7 @@ function Student(fname, sname, age) {
           Interactive <span className="premium-gradient-text">Study Lab</span>
         </h1>
         <p style={{ color: "var(--text-muted)", fontSize: "1.1rem" }}>
-          Master the exam-standard implementations with line-by-line breakdowns and live previews.
+          Master the exam-standard implementations with HTML structure, code breakdowns, and live previews.
         </p>
       </motion.div>
 
@@ -341,7 +379,7 @@ function Student(fname, sname, age) {
                   <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
                     {/* Left Side: Code & Explanation */}
                     <div>
-                      <SectionHeader icon={<Code size={16}/>} label="Implementation" />
+                      <SectionHeader icon={<Code size={16}/>} label="Full Implementation (HTML + JS)" />
                       <div style={codeContainerStyle}>
                         <pre style={codeStyle}>{sol.implementation}</pre>
                       </div>
@@ -363,10 +401,10 @@ function Student(fname, sname, age) {
                       {sol.demo}
                       
                       <div style={{ marginTop: "2rem", padding: "1.5rem", background: "rgba(255,255,255,0.02)", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.05)" }}>
-                        <h4 style={{ margin: "0 0 10px 0", fontSize: "0.9rem", color: "var(--primary)" }}>Study Tip</h4>
+                        <h4 style={{ margin: "0 0 10px 0", fontSize: "0.9rem", color: "var(--primary)" }}>Exam Success Tip</h4>
                         <p style={{ margin: 0, fontSize: "0.85rem", color: "var(--text-muted)", lineHeight: "1.6" }}>
-                          When writing this on paper, ensure you include both the <code>&lt;script&gt;</code> tags 
-                          and the <code>id</code> attributes in your HTML, as they are required for the logic to work.
+                          On the exam paper, make sure to write the <strong>HTML first</strong> and the <strong>Script second</strong>. 
+                          The connection depends on matching the <code>id</code> in the HTML to the <code>getElementById</code> in the JavaScript.
                         </p>
                       </div>
                     </div>
