@@ -326,28 +326,28 @@ s1.registerCourse(c1);
   ];
 
   return (
-    <div className="exercise-module" style={{ padding: "1rem" }}>
+    <div className="exercise-module" style={{ padding: "0.5rem" }}>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="welcome-card glass-card"
-        style={{ marginBottom: "2rem", padding: "3rem" }}
+        style={{ marginBottom: "1.5rem", padding: "1.5rem" }}
       >
-        <h1 style={{ fontSize: "2.5rem", marginBottom: "0.5rem" }}>
+        <h1 style={{ fontSize: "1.8rem", marginBottom: "0.5rem" }}>
           Interactive <span className="premium-gradient-text">Study Lab</span>
         </h1>
-        <p style={{ color: "var(--text-muted)", fontSize: "1.1rem" }}>
-          Master the exam-standard implementations with HTML structure, code breakdowns, and live previews.
+        <p style={{ color: "var(--text-muted)", fontSize: "0.95rem" }}>
+          Master exam-standard implementations with full breakdowns and live previews.
         </p>
       </motion.div>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "1.5rem" }}>
+      <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
         {solutions.map((sol) => (
           <div key={sol.id} className="glass-card" style={{ overflow: "hidden" }}>
             <div 
               onClick={() => setExpandedSection(expandedSection === sol.id ? null : sol.id)}
               style={{ 
-                padding: "1.5rem 2.5rem", 
+                padding: "1rem 1.25rem", 
                 display: "flex", 
                 justifyContent: "space-between", 
                 alignItems: "center",
@@ -356,11 +356,11 @@ s1.registerCourse(c1);
                 transition: "background 0.3s"
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <div style={{ color: "var(--primary)" }}>{sol.icon}</div>
-                <h2 style={{ fontSize: "1.4rem", margin: 0 }}>{sol.title}</h2>
+                <h2 style={{ fontSize: "1.1rem", margin: 0 }}>{sol.title}</h2>
               </div>
-              {expandedSection === sol.id ? <ChevronUp opacity={0.5} /> : <ChevronDown opacity={0.5} />}
+              {expandedSection === sol.id ? <ChevronUp opacity={0.5} size={20} /> : <ChevronDown opacity={0.5} size={20} />}
             </div>
 
             <AnimatePresence>
@@ -369,42 +369,41 @@ s1.registerCourse(c1);
                   initial={{ height: 0, opacity: 0 }}
                   animate={{ height: "auto", opacity: 1 }}
                   exit={{ height: 0, opacity: 0 }}
-                  style={{ padding: "0 2.5rem 2.5rem 2.5rem" }}
+                  style={{ padding: "0 1.25rem 1.25rem 1.25rem" }}
                 >
                   {/* Question */}
-                  <p style={{ color: "var(--text-muted)", marginBottom: "2rem", borderLeft: "2px solid var(--primary)", paddingLeft: "15px" }}>
+                  <p style={{ color: "var(--text-muted)", marginBottom: "1.5rem", borderLeft: "2px solid var(--primary)", paddingLeft: "10px", fontSize: "0.9rem" }}>
                     {sol.question}
                   </p>
 
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "2rem" }}>
+                  <div className="exercise-grid">
                     {/* Left Side: Code & Explanation */}
-                    <div>
-                      <SectionHeader icon={<Code size={16}/>} label="Full Implementation (HTML + JS)" />
+                    <div style={{ minWidth: 0 }}>
+                      <SectionHeader icon={<Code size={14}/>} label="Full Implementation" />
                       <div style={codeContainerStyle}>
                         <pre style={codeStyle}>{sol.implementation}</pre>
                       </div>
 
-                      <SectionHeader icon={<Info size={16}/>} label="Line-by-Line Breakdown" />
-                      <div style={{ display: "flex", flexDirection: "column", gap: "12px" }}>
+                      <SectionHeader icon={<Info size={14}/>} label="Line-by-Line Breakdown" />
+                      <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
                         {sol.explanation.map((text, i) => (
-                          <div key={i} style={{ display: "flex", gap: "12px", fontSize: "0.9rem" }}>
+                          <div key={i} style={{ display: "flex", gap: "10px", fontSize: "0.85rem" }}>
                             <div style={{ color: "var(--primary)", fontWeight: 800 }}>{i + 1}</div>
-                            <div style={{ color: "rgba(255,255,255,0.8)", lineHeight: "1.5" }}>{text}</div>
+                            <div style={{ color: "rgba(255,255,255,0.8)", lineHeight: "1.4" }}>{text}</div>
                           </div>
                         ))}
                       </div>
                     </div>
 
                     {/* Right Side: Demo */}
-                    <div>
-                      <SectionHeader icon={<Play size={16}/>} label="Live Demo" />
+                    <div style={{ minWidth: 0 }}>
+                      <SectionHeader icon={<Play size={14}/>} label="Live Demo" />
                       {sol.demo}
                       
-                      <div style={{ marginTop: "2rem", padding: "1.5rem", background: "rgba(255,255,255,0.02)", borderRadius: "12px", border: "1px solid rgba(255,255,255,0.05)" }}>
-                        <h4 style={{ margin: "0 0 10px 0", fontSize: "0.9rem", color: "var(--primary)" }}>Exam Success Tip</h4>
-                        <p style={{ margin: 0, fontSize: "0.85rem", color: "var(--text-muted)", lineHeight: "1.6" }}>
-                          On the exam paper, make sure to write the <strong>HTML first</strong> and the <strong>Script second</strong>. 
-                          The connection depends on matching the <code>id</code> in the HTML to the <code>getElementById</code> in the JavaScript.
+                      <div style={{ marginTop: "1.5rem", padding: "1rem", background: "rgba(255,255,255,0.02)", borderRadius: "10px", border: "1px solid rgba(255,255,255,0.05)" }}>
+                        <h4 style={{ margin: "0 0 8px 0", fontSize: "0.8rem", color: "var(--primary)" }}>Exam Success Tip</h4>
+                        <p style={{ margin: 0, fontSize: "0.8rem", color: "var(--text-muted)", lineHeight: "1.5" }}>
+                          On the exam paper, make sure to write the <strong>HTML first</strong> and the <strong>Script second</strong>.
                         </p>
                       </div>
                     </div>
@@ -415,70 +414,88 @@ s1.registerCourse(c1);
           </div>
         ))}
       </div>
+
+      <style>{`
+        .exercise-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.5rem;
+        }
+        @media (max-width: 1024px) {
+          .exercise-grid {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+          }
+        }
+      `}</style>
     </div>
   );
 };
 
 const SectionHeader = ({ icon, label }: { icon: any, label: string }) => (
-  <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "1rem", opacity: 0.6, marginTop: "1rem" }}>
+  <div style={{ display: "flex", alignItems: "center", gap: "6px", marginBottom: "0.75rem", opacity: 0.6, marginTop: "0.75rem" }}>
     {icon}
-    <span style={{ fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>{label}</span>
+    <span style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase" }}>{label}</span>
   </div>
 );
 
 const demoStyle: React.CSSProperties = {
   background: "rgba(0,0,0,0.3)",
-  padding: "2rem",
-  borderRadius: "16px",
+  padding: "1.5rem",
+  borderRadius: "12px",
   border: "1px solid rgba(255,255,255,0.1)",
   boxShadow: "0 10px 30px rgba(0,0,0,0.2)"
 };
 
 const inputStyle: React.CSSProperties = {
   width: "100%",
-  padding: "12px",
+  padding: "10px",
   background: "rgba(255,255,255,0.05)",
   border: "1px solid rgba(255,255,255,0.1)",
-  borderRadius: "8px",
+  borderRadius: "6px",
   color: "white",
-  marginBottom: "15px",
-  fontSize: "0.95rem"
+  marginBottom: "12px",
+  fontSize: "0.9rem"
 };
 
 const buttonStyle: React.CSSProperties = {
   width: "100%",
-  padding: "12px",
+  padding: "10px",
   background: "var(--primary)",
   border: "none",
-  borderRadius: "8px",
+  borderRadius: "6px",
   color: "white",
   fontWeight: 700,
-  cursor: "pointer"
+  cursor: "pointer",
+  fontSize: "0.9rem"
 };
 
 const resultStyle: React.CSSProperties = {
-  marginTop: "1.5rem",
+  marginTop: "1rem",
   textAlign: "center",
-  fontSize: "1.1rem",
+  fontSize: "1rem",
   fontWeight: 600,
   color: "#4ade80"
 };
 
 const codeContainerStyle: React.CSSProperties = {
   background: "#0d1117",
-  padding: "1.5rem",
-  borderRadius: "12px",
-  marginBottom: "1.5rem",
+  padding: "1rem",
+  borderRadius: "10px",
+  marginBottom: "1rem",
   border: "1px solid rgba(255,255,255,0.1)",
-  overflowX: "auto"
+  overflowX: "auto",
+  maxWidth: "100%"
 };
 
 const codeStyle: React.CSSProperties = {
   margin: 0,
   color: "#e6edf3",
-  fontSize: "0.85rem",
+  fontSize: "0.8rem",
   fontFamily: "monospace",
-  lineHeight: "1.6"
+  lineHeight: "1.5",
+  whiteSpace: "pre-wrap",
+  wordBreak: "break-all"
 };
 
 export default Exercise;
