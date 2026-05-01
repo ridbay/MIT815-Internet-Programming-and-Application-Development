@@ -10,6 +10,7 @@ import Summaries from "./components/modules/Summaries";
 import Flashcards from "./components/modules/Flashcards";
 import QuizMode from "./components/modules/QuizMode";
 import Revision from "./components/modules/Revision";
+import Exercise from "./components/modules/Exercise";
 
 const App: React.FC = () => {
   const { data, progress, toggleBookmark, markFlashcard, saveQuizScore } =
@@ -61,6 +62,8 @@ const App: React.FC = () => {
         );
       case "revision":
         return <Revision data={data} />;
+      case "exercise":
+        return <Exercise />;
       default:
         return (
           <Dashboard
@@ -77,6 +80,7 @@ const App: React.FC = () => {
     { id: "summaries", label: "Guide", icon: <BookOpen size={20} /> },
     { id: "flashcards", label: "Cards", icon: <Zap size={20} /> },
     { id: "quiz", label: "Quiz", icon: <Target size={20} /> },
+    { id: "exercise", label: "Lab", icon: <Zap size={20} /> },
   ];
 
   return (

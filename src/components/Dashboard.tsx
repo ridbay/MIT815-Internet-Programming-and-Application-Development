@@ -138,6 +138,12 @@ const Dashboard: React.FC<DashboardProps> = ({
           icon={<Zap size={24} />}
           onClick={() => onNavigate("revision")}
         />
+        <ModuleLink
+          title="JS Exercises"
+          desc="Practical JavaScript labs (Factorial, Cipher, Objects)."
+          icon={<Zap size={24} />}
+          onClick={() => onNavigate("exercise")}
+        />
       </div>
     </div>
   );
